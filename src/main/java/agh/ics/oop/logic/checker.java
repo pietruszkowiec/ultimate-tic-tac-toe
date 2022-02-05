@@ -1,4 +1,4 @@
 package agh.ics.oop.logic;
 
-public class checker {
+public class Checker {
 }

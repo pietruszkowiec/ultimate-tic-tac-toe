@@ -1,6 +1,6 @@
 package agh.ics.oop.enums.moves;
 
-public enum SmallBoardMove {
+public enum BigBoardPosition {
     NW,
     N,
     NE,
