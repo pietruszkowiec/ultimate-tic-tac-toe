@@ -8,4 +8,17 @@ public class Tuple {
         this.i = i;
         this.j = j;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Tuple)) {
+            return false;
+        }
+        Tuple that = (Tuple) other;
+
+        return this.i == that.i && this.j == that.j;
+    }
 }

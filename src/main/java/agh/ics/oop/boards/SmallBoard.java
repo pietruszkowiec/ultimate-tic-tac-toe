@@ -1,36 +1,38 @@
 package agh.ics.oop.boards;
 
 import agh.ics.oop.Field;
+import agh.ics.oop.enums.BoardPosition;
 import agh.ics.oop.enums.states.FieldState;
 import agh.ics.oop.enums.Player;
 import agh.ics.oop.enums.states.BoardState;
-import agh.ics.oop.enums.moves.BigBoardPosition;
-import agh.ics.oop.enums.moves.SmallBoardPosition;
 
 public class SmallBoard {
+    public final BoardPosition bigBoardPosition;
     private BoardState boardState = BoardState.ONGOING;
-    public final BigBoardPosition position;
     private final Field[][] fields = new Field[3][3];
-    private final static SmallBoardPosition[] positionsForHChecking = {
-            SmallBoardPosition.N,
-            SmallBoardPosition.C,
-            SmallBoardPosition.S
+    private final static BoardPosition[] positionsForHChecking = {
+            BoardPosition.N,
+            BoardPosition.C,
+            BoardPosition.S
     };
-    private final static SmallBoardPosition[] positionsForVChecking = {
-            SmallBoardPosition.W,
-            SmallBoardPosition.C,
-            SmallBoardPosition.E
+    private final static BoardPosition[] positionsForVChecking = {
+            BoardPosition.W,
+            BoardPosition.C,
+            BoardPosition.E
     };
 
-    public SmallBoard(BigBoardPosition position) {
-        this.position = position;
+
+    public SmallBoard(BoardPosition bigBoardPosition) {
+        this.bigBoardPosition = bigBoardPosition;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                this.fields[i][j] = new Field();
+            }
+        }
     }
 
-    public boolean makeMove(SmallBoardPosition move, Player player) {
-        int i = move.toTuple().i;
-        int j = move.toTuple().j;
-
-        if (!fields[i][j].isEmpty()) {
+    public boolean makeMove(int i, int j, Player player) {
+        if (!(this.fields[i][j].isEmpty())) {
             return false;
         }
 
@@ -44,7 +46,7 @@ public class SmallBoard {
         int jCenter;
         FieldState centerState;
 
-        for (SmallBoardPosition centerPosition : positionsForHChecking) {
+        for (BoardPosition centerPosition : positionsForHChecking) {
             iCenter = centerPosition.toTuple().i;
             jCenter = centerPosition.toTuple().j;
             centerState = this.fields[iCenter][jCenter].getFieldState();
@@ -56,7 +58,7 @@ public class SmallBoard {
             }
         }
 
-        for (SmallBoardPosition centerPosition : positionsForVChecking) {
+        for (BoardPosition centerPosition : positionsForVChecking) {
             iCenter = centerPosition.toTuple().i;
             jCenter = centerPosition.toTuple().j;
             centerState = this.fields[iCenter][jCenter].getFieldState();
