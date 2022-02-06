@@ -1,8 +1,9 @@
 package agh.ics.oop.enums.states;
 
 import agh.ics.oop.enums.Player;
+import agh.ics.oop.interfaces.IState;
 
-public enum FieldState {
+public enum FieldState implements IState {
     X,
     O,
     EMPTY;

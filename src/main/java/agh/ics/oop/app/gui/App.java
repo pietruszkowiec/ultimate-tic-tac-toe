@@ -1,6 +1,6 @@
 package agh.ics.oop.app.gui;
 
-import agh.ics.oop.app.engine.Engine;
+import agh.ics.oop.app.Engine;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

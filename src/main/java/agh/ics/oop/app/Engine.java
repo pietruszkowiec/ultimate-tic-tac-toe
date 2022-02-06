@@ -1,4 +1,4 @@
-package agh.ics.oop.app.engine;
+package agh.ics.oop.app;
 
 import agh.ics.oop.Tuple;
 import agh.ics.oop.app.gui.elements.BigBoardGrid;

@@ -1,11 +1,12 @@
 package agh.ics.oop;
 
 import agh.ics.oop.enums.states.FieldState;
+import agh.ics.oop.interfaces.IBoardField;
 
-public class Field {
+public class Field implements IBoardField {
     private FieldState fieldState = FieldState.EMPTY;
 
-    public FieldState getFieldState() {
+    public FieldState getState() {
         return fieldState;
     }
 

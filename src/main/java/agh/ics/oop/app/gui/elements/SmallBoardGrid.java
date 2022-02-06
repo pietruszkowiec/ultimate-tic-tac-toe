@@ -1,7 +1,7 @@
 package agh.ics.oop.app.gui.elements;
 
 import agh.ics.oop.Tuple;
-import agh.ics.oop.app.engine.Engine;
+import agh.ics.oop.app.Engine;
 import agh.ics.oop.boards.SmallBoard;
 import agh.ics.oop.enums.Player;
 import agh.ics.oop.enums.BoardPosition;
@@ -54,14 +54,14 @@ public class SmallBoardGrid {
         Player player = this.engine.turn;
         BoardPosition boardPosition;
         Tuple tuple;
-        if (this.smallBoard.getBoardState() == BoardState.ONGOING && this.smallBoard.makeMove(i, j, player) ) {
+        if (this.smallBoard.getState() == BoardState.ONGOING && this.smallBoard.makeMove(i, j, player) ) {
             this.fields[i][j].changeState(player);
             tuple = new Tuple(i, j);
 
 
             String playerImageFile;
             if(this.smallBoard.checkForChangeOfState()) {
-                if (this.smallBoard.getBoardState() == BoardState.DRAW) {
+                if (this.smallBoard.getState() == BoardState.DRAW) {
 
                     this.smallBoardBox.setStyle("-fx-background-color: yellow;\n" +
                             "-fx-background-image: url(DRAW.png);\n" +

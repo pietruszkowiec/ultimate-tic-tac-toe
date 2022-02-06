@@ -1,7 +1,7 @@
 package agh.ics.oop.app.gui.elements;
 
 import agh.ics.oop.Tuple;
-import agh.ics.oop.app.engine.Engine;
+import agh.ics.oop.app.Engine;
 import agh.ics.oop.boards.BigBoard;
 import agh.ics.oop.boards.SmallBoard;
 import javafx.geometry.Pos;
