@@ -58,6 +58,8 @@ public class SmallBoardGrid {
         if (this.smallBoard.getState() == BoardState.ONGOING && this.smallBoard.makeMove(i, j, player) ) {
             this.fields[i][j].changeState(player);
 
+            System.out.print(this.engine.moveCounter + ". ");
+            System.out.print(player + " : ");
             boardPosition = BoardPosition.tupleToBoardPosition(this.smallBoard.bigBoardPositionTuple);
             System.out.print(boardPosition + " / ");
             boardPosition = BoardPosition.tupleToBoardPosition(tuple);

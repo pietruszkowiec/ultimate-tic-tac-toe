@@ -53,7 +53,6 @@ public class App extends Application {
         this.engine = engine;
         Scene scene = new Scene(engine.getMainBox());
         primaryStage.setScene(scene);
-        System.out.println("Which small board / Which field");
         primaryStage.show();
     }
 }

@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Engine {
     public Player turn;
@@ -19,17 +20,19 @@ public class Engine {
     public final BigBoardGrid bigBoardGrid;
     private final Label label;
     private boolean finished = false;
+    public final AtomicInteger moveCounter = new AtomicInteger(1);
 
     public Engine(App app) {
         this.app = app;
         this.bigBoard = new BigBoard();
         this.bigBoardGrid = new BigBoardGrid(bigBoard, this);
         this.turn = Player.X;
-        this.label = new Label(this.turn + " turn");
+        this.label = new Label(this.turn + "'s turn");
         this.label.setFont(new Font(30));
     }
 
     public void nextTurn(Tuple nextTuple) {
+        this.moveCounter.incrementAndGet();
         Tuple prevTuple = null;
 
         if (this.nextBoardPositionTuple != null) {
@@ -46,13 +49,13 @@ public class Engine {
 
         if (this.finished) {
             this.bigBoardGrid.changeFocusOnBoard(null, null);
-            System.out.println("Game has ended");
+            System.out.println(this.bigBoard.getState() + "");
             this.app.closeApp();
             return;
         }
 
         this.turn = this.turn.nextTurn();
-        this.label.setText(this.turn + " turn");
+        this.label.setText(this.turn + "'s turn");
     }
 
     public BorderPane getMainBox() {
