@@ -5,7 +5,6 @@ import agh.ics.oop.interfaces.IBoardField;
 import agh.ics.oop.Tuple;
 import agh.ics.oop.enums.states.FieldState;
 import agh.ics.oop.enums.Player;
-import agh.ics.oop.interfaces.IState;
 
 public class SmallBoard extends AbstractBoard implements IBoardField {
     public final Tuple bigBoardPositionTuple;
@@ -18,11 +17,6 @@ public class SmallBoard extends AbstractBoard implements IBoardField {
                 this.boardFields[i][j] = new Field();
             }
         }
-    }
-
-    @Override
-    public IState getState() {
-        return this.boardState;
     }
 
     public Tuple getBigBoardPositionTuple() {

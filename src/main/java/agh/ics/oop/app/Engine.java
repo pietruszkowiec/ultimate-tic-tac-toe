@@ -1,6 +1,7 @@
 package agh.ics.oop.app;
 
 import agh.ics.oop.Tuple;
+import agh.ics.oop.app.gui.App;
 import agh.ics.oop.app.gui.elements.BigBoardGrid;
 import agh.ics.oop.boards.BigBoard;
 import agh.ics.oop.enums.Player;
@@ -13,11 +14,14 @@ import javafx.scene.text.Font;
 public class Engine {
     public Player turn;
     public Tuple nextBoardPositionTuple = null;
-    public BigBoard bigBoard;
-    public BigBoardGrid bigBoardGrid;
+    public final App app;
+    public final BigBoard bigBoard;
+    public final BigBoardGrid bigBoardGrid;
     private final Label label;
+    private boolean finished = false;
 
-    public Engine() {
+    public Engine(App app) {
+        this.app = app;
         this.bigBoard = new BigBoard();
         this.bigBoardGrid = new BigBoardGrid(bigBoard, this);
         this.turn = Player.X;
@@ -39,6 +43,12 @@ public class Engine {
             this.bigBoardGrid.changeFocusOnBoard(prevTuple, null);
             this.nextBoardPositionTuple = null;
         }
+
+        if (this.finished) {
+            System.out.println("Game has ended");
+            return;
+        }
+
         this.turn = this.turn.nextTurn();
         this.label.setText(this.turn + " turn");
     }
@@ -49,5 +59,11 @@ public class Engine {
         borderPane.setCenter(this.bigBoardGrid.getGridPane());
         BorderPane.setAlignment(this.label, Pos.CENTER);
         return borderPane;
+    }
+
+    public void finishGame() {
+        this.label.setText(this.bigBoard.getState() + "");
+        this.finished = true;
+        this.app.closeApp();
     }
 }

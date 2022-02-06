@@ -16,12 +16,17 @@ public enum BoardState implements IState {
         };
     }
 
-    public static BoardState StateToBoardState(IState state) {
-        FieldState fieldState = (FieldState) state;
-        return switch (fieldState) {
-            case X -> BoardState.X_WIN;
-            case O -> BoardState.O_WIN;
-            case EMPTY -> BoardState.ONGOING;
-        };
+    public static BoardState stateToBoardState(IState state) {
+        if (state instanceof FieldState fieldState) {
+            return switch (fieldState) {
+                case X -> BoardState.X_WIN;
+                case O -> BoardState.O_WIN;
+                case EMPTY -> BoardState.ONGOING;
+            };
+        } else if (state instanceof BoardState boardState) {
+            return boardState;
+        } else {
+            throw new IllegalArgumentException("Illegal state in StateTOBoardState");
+        }
     }
 }

@@ -14,11 +14,9 @@ public class Tuple {
         if (this == other) {
             return true;
         }
-        if (!(other instanceof Tuple)) {
+        if (!(other instanceof Tuple that)) {
             return false;
         }
-        Tuple that = (Tuple) other;
-
         return this.i == that.i && this.j == that.j;
     }
 }

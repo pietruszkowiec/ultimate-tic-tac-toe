@@ -53,20 +53,24 @@ public class SmallBoardGrid {
         }
         Player player = this.engine.turn;
         BoardPosition boardPosition;
-        Tuple tuple;
+        Tuple tuple = new Tuple(i, j);
+
+        boardPosition = BoardPosition.tupleToBoardPosition(this.smallBoard.bigBoardPositionTuple);
+        System.out.print(boardPosition + " / ");
+        boardPosition = BoardPosition.tupleToBoardPosition(tuple);
+        System.out.println(boardPosition);
+
         if (this.smallBoard.getState() == BoardState.ONGOING && this.smallBoard.makeMove(i, j, player) ) {
             this.fields[i][j].changeState(player);
-            tuple = new Tuple(i, j);
-
 
             String playerImageFile;
             if(this.smallBoard.checkForChangeOfState()) {
                 if (this.smallBoard.getState() == BoardState.DRAW) {
 
-                    this.smallBoardBox.setStyle("-fx-background-color: yellow;\n" +
-                            "-fx-background-image: url(DRAW.png);\n" +
-                            "-fx-background-size: " + BigBoardGrid.smallBoardSize + "px "
-                                + BigBoardGrid.smallBoardSize + "px;");
+                    this.smallBoardBox.setStyle("-fx-background-color: yellow;");
+//                            "-fx-background-image: url(DRAW.png);\n" +
+//                            "-fx-background-size: " + BigBoardGrid.smallBoardSize + "px "
+//                                + BigBoardGrid.smallBoardSize + "px;");
                 } else {
                     playerImageFile = player + ".png";
                     this.smallBoardBox.setStyle("-fx-background-color: lightblue;\n" +
@@ -74,15 +78,13 @@ public class SmallBoardGrid {
                             "-fx-background-size: " + BigBoardGrid.smallBoardSize + "px "
                                 + BigBoardGrid.smallBoardSize + "px;");
                 }
+
+                if (this.engine.bigBoard.checkForChangeOfState()) {
+                    this.engine.finishGame();
+                }
             }
 
             this.engine.nextTurn(tuple);
-
-            boardPosition = BoardPosition.tupleToBoardPosition(this.smallBoard.bigBoardPositionTuple);
-            System.out.print(boardPosition + " / ");
-            boardPosition = BoardPosition.tupleToBoardPosition(tuple);
-            System.out.println(boardPosition);
-
         }
     }
 
