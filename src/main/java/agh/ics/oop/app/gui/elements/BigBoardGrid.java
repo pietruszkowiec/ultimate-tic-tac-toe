@@ -10,15 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public class BigBoardGrid {
-    private final Engine engine;
     private final GridPane gridPane;
-    private final BigBoard bigBoard;
     private final SmallBoardGrid[][] smallBoardGrids = new SmallBoardGrid[3][3];
-    private static final int smallBoardSize = SmallBoardGrid.cellSize * 3 + 10;
+    public static final int smallBoardSize = SmallBoardGrid.cellSize * 3 + 10;
 
     public BigBoardGrid(BigBoard bigBoard, Engine engine) {
-        this.bigBoard = bigBoard;
-        this.engine = engine;
         this.gridPane = new GridPane();
 
         this.gridPane.setStyle("-fx-background-color: lightgreen;");
@@ -28,11 +24,11 @@ public class BigBoardGrid {
             this.gridPane.getRowConstraints().add(new RowConstraints(smallBoardSize));
         }
 
-        SmallBoard[][] smallBoards = this.bigBoard.getSmallBoards();
+        SmallBoard[][] smallBoards = bigBoard.getSmallBoards();
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                this.smallBoardGrids[i][j] = new SmallBoardGrid(smallBoards[i][j], this.engine, this);
+                this.smallBoardGrids[i][j] = new SmallBoardGrid(smallBoards[i][j], engine);
                 this.gridPane.add(smallBoardGrids[i][j].getSmallBoardBox(), j, i);
                 this.smallBoardGrids[i][j].getGridPane().setAlignment(Pos.CENTER);
             }

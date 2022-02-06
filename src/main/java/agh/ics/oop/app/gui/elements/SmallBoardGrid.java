@@ -6,23 +6,19 @@ import agh.ics.oop.boards.SmallBoard;
 import agh.ics.oop.enums.Player;
 import agh.ics.oop.enums.BoardPosition;
 import agh.ics.oop.enums.states.BoardState;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 
 public class SmallBoardGrid {
     private final Engine engine;
-    private final BigBoardGrid bigBoardGrid;
     private final BorderPane smallBoardBox;
     private final GridPane gridPane;
     private final SmallBoard smallBoard;
     private final FieldButton[][] fields = new FieldButton[3][3];
-    public static final int cellSize = 40;
+    public static final int cellSize = 60;
 
-    public SmallBoardGrid(SmallBoard smallBoard, Engine engine, BigBoardGrid bigBoardGrid) {
+    public SmallBoardGrid(SmallBoard smallBoard, Engine engine) {
         this.smallBoard = smallBoard;
         this.engine = engine;
-        this.bigBoardGrid = bigBoardGrid;
         this.gridPane = new GridPane();
         this.smallBoardBox = new BorderPane();
         this.smallBoardBox.setCenter(this.gridPane);
@@ -63,18 +59,20 @@ public class SmallBoardGrid {
             tuple = new Tuple(i, j);
 
 
-            Label label;
+            String playerImageFile;
             if(this.smallBoard.checkForChangeOfState()) {
                 if (this.smallBoard.getBoardState() == BoardState.DRAW) {
-                    label = new Label("D");
-                    label.setFont(new Font((40)));
-                    this.smallBoardBox.setCenter(label);
-                    this.smallBoardBox.setStyle("-fx-background-color: lightyellow;");
+
+                    this.smallBoardBox.setStyle("-fx-background-color: yellow;\n" +
+                            "-fx-background-image: url(DRAW.png);\n" +
+                            "-fx-background-size: " + BigBoardGrid.smallBoardSize + "px "
+                                + BigBoardGrid.smallBoardSize + "px;");
                 } else {
-                    label = new Label("" + player);
-                    label.setFont(new Font((40)));
-                    this.smallBoardBox.setCenter(label);
-                    this.smallBoardBox.setStyle("-fx-background-color: lightblue;");
+                    playerImageFile = player + ".png";
+                    this.smallBoardBox.setStyle("-fx-background-color: lightblue;\n" +
+                            "-fx-background-image: url(" + playerImageFile +");\n" +
+                            "-fx-background-size: " + BigBoardGrid.smallBoardSize + "px "
+                                + BigBoardGrid.smallBoardSize + "px;");
                 }
             }
 

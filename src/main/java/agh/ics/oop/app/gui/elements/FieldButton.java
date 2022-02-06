@@ -4,6 +4,8 @@ import agh.ics.oop.enums.Player;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 
+import static agh.ics.oop.app.gui.elements.SmallBoardGrid.cellSize;
+
 public class FieldButton {
     private final int i;
     private final int j;
@@ -16,10 +18,11 @@ public class FieldButton {
         this.smallBoardGrid = smallBoardGrid;
         this.button = new Button();
         this.button.setOnAction(event -> onClick());
+        this.button.setPrefSize(cellSize, cellSize);
         this.button.setStyle(
                 "-fx-background-color: transparent;\n" +
-                "-fx-pref-height: 40px;\n" +
-                "-fx-pref-width: 40px;");
+                "-fx-pref-height: " + cellSize + "px;\n" +
+                "-fx-pref-width: " + cellSize + "px;");
     }
 
     public Button getButton() {
@@ -32,9 +35,13 @@ public class FieldButton {
 
     public void changeState(Player player) {
         if (player == Player.X) {
-            this.button.setText("X");
+            this.button.setStyle(this.button.getStyle() +
+                    "-fx-background-image: url(X.png);\n" +
+                    "-fx-background-size: "+ cellSize + "px "+ cellSize + "px;");
         } else {
-            this.button.setText("O");
+            this.button.setStyle(this.button.getStyle() +
+                    "-fx-background-image: url(O.png);\n" +
+                    "-fx-background-size: "+ cellSize + "px "+ cellSize + "px;");
         }
         this.button.setAlignment(Pos.CENTER);
     }

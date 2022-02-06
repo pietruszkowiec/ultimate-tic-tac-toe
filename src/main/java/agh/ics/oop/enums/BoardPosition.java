@@ -13,7 +13,7 @@ public enum BoardPosition {
     S,
     SE;
 
-    private static Tuple[] tuples = {
+    private static final Tuple[] tuples = {
             new Tuple(0, 0),
             new Tuple(0, 1),
             new Tuple(0, 2),
