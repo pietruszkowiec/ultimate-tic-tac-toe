@@ -45,7 +45,9 @@ public class Engine {
         }
 
         if (this.finished) {
+            this.bigBoardGrid.changeFocusOnBoard(null, null);
             System.out.println("Game has ended");
+            this.app.closeApp();
             return;
         }
 
@@ -64,6 +66,5 @@ public class Engine {
     public void finishGame() {
         this.label.setText(this.bigBoard.getState() + "");
         this.finished = true;
-        this.app.closeApp();
     }
 }
