@@ -55,22 +55,18 @@ public class SmallBoardGrid {
         BoardPosition boardPosition;
         Tuple tuple = new Tuple(i, j);
 
-        boardPosition = BoardPosition.tupleToBoardPosition(this.smallBoard.bigBoardPositionTuple);
-        System.out.print(boardPosition + " / ");
-        boardPosition = BoardPosition.tupleToBoardPosition(tuple);
-        System.out.println(boardPosition);
-
         if (this.smallBoard.getState() == BoardState.ONGOING && this.smallBoard.makeMove(i, j, player) ) {
             this.fields[i][j].changeState(player);
+
+            boardPosition = BoardPosition.tupleToBoardPosition(this.smallBoard.bigBoardPositionTuple);
+            System.out.print(boardPosition + " / ");
+            boardPosition = BoardPosition.tupleToBoardPosition(tuple);
+            System.out.println(boardPosition);
 
             String playerImageFile;
             if(this.smallBoard.checkForChangeOfState()) {
                 if (this.smallBoard.getState() == BoardState.DRAW) {
-
                     this.smallBoardBox.setStyle("-fx-background-color: yellow;");
-//                            "-fx-background-image: url(DRAW.png);\n" +
-//                            "-fx-background-size: " + BigBoardGrid.smallBoardSize + "px "
-//                                + BigBoardGrid.smallBoardSize + "px;");
                 } else {
                     playerImageFile = player + ".png";
                     this.smallBoardBox.setStyle("-fx-background-color: lightblue;\n" +

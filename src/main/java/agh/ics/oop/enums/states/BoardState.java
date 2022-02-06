@@ -1,6 +1,5 @@
 package agh.ics.oop.enums.states;
 
-import agh.ics.oop.enums.Player;
 import agh.ics.oop.interfaces.IState;
 
 public enum BoardState implements IState {
@@ -9,10 +8,12 @@ public enum BoardState implements IState {
     O_WIN,
     DRAW;
 
-    public static BoardState playerToResult(Player player) {
-        return switch (player) {
-            case X -> BoardState.X_WIN;
-            case O -> BoardState.O_WIN;
+    public String toString() {
+        return switch (this) {
+            case X_WIN -> "X wins";
+            case O_WIN -> "O wins";
+            case DRAW -> "Draw";
+            case ONGOING -> "Game is not over";
         };
     }
 

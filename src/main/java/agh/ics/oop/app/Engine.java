@@ -26,7 +26,7 @@ public class Engine {
         this.bigBoardGrid = new BigBoardGrid(bigBoard, this);
         this.turn = Player.X;
         this.label = new Label(this.turn + " turn");
-        this.label.setFont(new Font(16));
+        this.label.setFont(new Font(30));
     }
 
     public void nextTurn(Tuple nextTuple) {

@@ -51,5 +51,4 @@ public class BigBoardGrid {
             this.gridPane.setStyle("-fx-background-color: lightgreen;");
         }
     }
-
 }
