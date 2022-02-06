@@ -1,5 +1,6 @@
 package agh.ics.oop.app.gui.elements;
 
+import agh.ics.oop.Tuple;
 import agh.ics.oop.app.engine.Engine;
 import agh.ics.oop.boards.BigBoard;
 import agh.ics.oop.boards.SmallBoard;
@@ -20,6 +21,8 @@ public class BigBoardGrid {
         this.engine = engine;
         this.gridPane = new GridPane();
 
+        this.gridPane.setStyle("-fx-background-color: lightgreen;");
+
         for (int i = 0; i < 3; i++) {
             this.gridPane.getColumnConstraints().add(new ColumnConstraints(smallBoardSize));
             this.gridPane.getRowConstraints().add(new RowConstraints(smallBoardSize));
@@ -30,7 +33,7 @@ public class BigBoardGrid {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 this.smallBoardGrids[i][j] = new SmallBoardGrid(smallBoards[i][j], this.engine, this);
-                this.gridPane.add(smallBoardGrids[i][j].getGridPane(), j, i);
+                this.gridPane.add(smallBoardGrids[i][j].getSmallBoardBox(), j, i);
                 this.smallBoardGrids[i][j].getGridPane().setAlignment(Pos.CENTER);
             }
         }
@@ -40,11 +43,17 @@ public class BigBoardGrid {
         return gridPane;
     }
 
-    public void changeFocusOnBoard(int iPrev, int jPrev, int iNext, int jNext) {
-        if (iPrev >= 0 && iPrev < 3 && jPrev >= 0 && jPrev < 3) {
-            this.smallBoardGrids[iPrev][jPrev].removeBackgroundColor();
+    public void changeFocusOnBoard(Tuple prevTuple, Tuple nextTuple) {
+        if (prevTuple != null) {
+            this.smallBoardGrids[prevTuple.i][prevTuple.j].removeBackgroundColor();
+        } else {
+            this.gridPane.setStyle("");
         }
-        this.smallBoardGrids[iNext][jNext].changeBackgroundColor();
+        if (nextTuple != null) {
+            this.smallBoardGrids[nextTuple.i][nextTuple.j].changeBackgroundColor();
+        } else {
+            this.gridPane.setStyle("-fx-background-color: lightgreen;");
+        }
     }
 
 }

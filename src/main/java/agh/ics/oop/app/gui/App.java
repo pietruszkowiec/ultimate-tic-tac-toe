@@ -9,7 +9,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         Engine engine = new Engine();
-        Scene scene = new Scene(engine.getBigBoardGrid());
+        Scene scene = new Scene(engine.getMainBox());
         primaryStage.setScene(scene);
         primaryStage.show();
     }
